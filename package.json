@@ -2,7 +2,7 @@
   "name": "sequelizedBurger",
   "version": "1.0.0",
   "description": "Eat da Burger",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "method-override": "^2.3.6",
-    "mysql": "^2.12.0"
+    "mysql": "^2.12.0",
+    "sequelize": "^3.25.0"
   }
 }
