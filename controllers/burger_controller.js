@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 //var model = require('./models');
 var Burger = require('../models/')["Burger"];
-console.log(Burger);
 
 router.get('/', function(req, res) {
     res.redirect('/burgers');
@@ -16,7 +15,6 @@ router.get('/burgers', function(req, res) {
 });
 
 router.post('/burgers/create', function(req, res) {
-    console.log(req.body.burger);
     Burger.create({burger_name: req.body.burger_name, devoured:false})
     .then(function() {
         res.redirect('/burgers');
