@@ -1,40 +1,40 @@
-//routing
-var models= require('../models');
 var express = require('express');
 var router = express.Router();
+//var model = require('./models');
+var Burger = require('../models/')["Burger"];
+console.log(Burger);
 
-router.get('/', function (req, res) {
+router.get('/', function(req, res) {
     res.redirect('/burgers');
 });
 
-router.get('/burgers', function (req, res) {
-    models.Burger.findAll({}).then(function(burgers){
-    res.render('index', {
-        burgers: burgers
+router.get('/burgers', function(req, res) {
+    Burger.findAll()
+    .then(function(data){
+        res.render('index', {burgers: data});
     });
 });
-});
 
-//for adding in a new burger
-router.post('/burgers/create', function (req, res) {
-	models.Burger.create({
-        burger_name: req.body.burger_name,
-        devoured: false
-    }).then(function(){
+router.post('/burgers/create', function(req, res) {
+    console.log(req.body.burger);
+    Burger.create({burger_name: req.body.burger_name, devoured:false})
+    .then(function() {
         res.redirect('/burgers');
     });
 });
 
-//for updating the status from not devoured to devoured
-router.put('/burgers/update/:id', function (req, res) {
-	models.Burger.update({
-        devoured: req.body.devoured
-    },
-    {
-        where: {id: req.params.id}
-    }).then(function(result){
+router.put('/burgers/update/:id', function(req, res) {
+    Burger.update({devoured:true},{where: { id: req.params.id}})
+    .then(function(){
         res.redirect('/burgers');
-    })
+    });
 });
+
+router.delete('/burgers/delete/:id', function (req, res) {
+    Burger.delete({where: { id: req.params.id}})
+    .then(function(){
+        res.redirect('/burgers');
+        });
+    });
 
 module.exports = router;
